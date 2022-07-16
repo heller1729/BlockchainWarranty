@@ -1,0 +1,91 @@
+@mixin stroke($color: #000, $size: 1px) {
+    text-shadow:
+      -#{$size} -#{$size} 0 $color,
+       0        -#{$size} 0 $color,
+       #{$size} -#{$size} 0 $color,
+       #{$size}  0        0 $color,
+       #{$size}  #{$size} 0 $color,
+       0         #{$size} 0 $color,
+      -#{$size}  #{$size} 0 $color,
+      -#{$size}  0        0 $color;
+}
+
+.header-container {
+    padding: 2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .logo {
+        display: flex;
+        align-items: center;
+
+        h1 {
+            font-size: min(4rem, 6vh);
+            font-weight: 600;
+            color: var(--logo-color);
+            font-family: var(--styled-font);
+            @include stroke(#000, 4px);
+            letter-spacing: 2px;
+            cursor: pointer;
+            
+            &:hover {
+                animation: wiggle forwards 0.5s 1 ease-in-out;
+            }
+        }
+    
+        img {
+            height: min(4.5rem, 8vh);
+            aspect-ratio: 21 / 9;
+            object-fit: cover;
+        }
+    }
+
+    .wallet-address {
+        padding: 1rem;
+        color: var(--text);
+        background: var(--glass-bg);
+        backdrop-filter: var(--glass-filter);
+        border: 3px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        border-radius: 0.5rem;
+        position: relative;
+    }
+
+    p {
+        margin-left: 1.2rem;
+    }
+
+    .wallet-red::after, .wallet-green::after {
+        content: "";
+        position: absolute;
+        inset: 50% 1rem;
+        transform: translateY(-50%);
+        width: 10px;
+        aspect-ratio: 1;
+        border-radius: 1rem;
+    }
+
+    .wallet-red::after {
+        background-color: #fe523d;
+        // box-shadow: 0px 0px 5px#970400, 0px 0px 10px #930300, 0px 0px 15px #6c0101;
+    }
+
+    .wallet-green::after {
+        background-color: #8fc894;
+        // box-shadow: 0px 0px 5px#237322, 0px 0px 10px #066409, 0px 0px 15px #095d0c;
+    }
+}
+
+// Mobile Devices
+@media screen and (max-width: 768px) {
+    .header-container {
+        justify-content: center;
+        gap: 1rem;
+        
+        .wallet-address {
+            display: none;
+        }
+    }
+}
